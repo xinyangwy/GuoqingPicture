@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <title>微信国庆头像生成工具</title>
+    <style>
+        html,
+        body {
+            background-image: url('imgs/background1.png');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+        }
+
+        ul {
+            width: 360px;
+            margin: 0 auto 30px;
+            overflow: hidden;
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            width: 25%;
+            float: left;
+            padding: 12px; /* 原12 */
+            box-sizing: border-box;
+        }
+
+        ul li img {
+            width: 100%;
+        }
+
+        canvas {
+            margin: auto;
+            display: none;
+            background: transparent;
+        }
+
+        button {
+            margin: 40px auto;
+            display: block;
+            width: 240px;
+            height: 60px;
+            color: #fff;
+            background: linear-gradient(#ffe984, #ed8917) #ed8917;
+            font-size: 22px;
+            font-weight: bold;
+            border-radius: 12px;
+            border: none;
+            outline: none;
+        }
+
+        .generateImg {
+            width: 320px;
+            height: 320px;
+            display: block;
+            margin: auto;
+        }
+
+        .cus-text {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+<div class="cus-text">
+    <ul>
+        <li><img src="./imgs/avatar-1.png"></li>
+        <li><img src="./imgs/avatar-2.png"></li>
+        <li><img src="./imgs/avatar-3.png"></li>
+        <li><img src="./imgs/avatar-4.png"></li>
+        <li><img src="./imgs/avatar-5.png"></li>
+        <li><img src="./imgs/avatar-6.png"></li>
+        <li><img src="./imgs/avatar-7.png"></li>
+        <li><img src="./imgs/avatar-8.png"></li>
+    </ul>
+
+    <button>上传图片</button>
+    <canvas id="canvas" width="800" height="800"></canvas>
+    <img src="" class="generateImg">
+    <input type="file" accept="image/*" hidden>
+</div>
+<!--<div style="left: 47%; position: absolute; top:90%;font-weight:bold;font-size:19px"> 恭喜您注册成功!</div>-->
+
+<div style="margin-top:40px ;text-align: center;font-family:‘Times New Roman’,Georgia,Serif;color: white;" ;>欢迎关注微信公众号:自学编程ing</div>
+
+<script>
+    const ul = document.querySelector('ul')
+    const img = document.querySelectorAll('ul img')
+    const button = document.querySelector('button')
+    const canvas = document.querySelector('#canvas')
+    const ctx = canvas.getContext('2d')
+    const generateImg = document.querySelector('.generateImg')
+    const fileUpload = document.querySelector('input')
+    let upLoadImg
+    let avatarIcon
+
+
+    // 画canvas
+    function drawImage(img) {
+        ctx.drawImage(img, 0, 0, 800, 800)
+    }
+
+    // 清空canvas
+    function resetCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        ctx.fillStyle = 'rgba(255, 255, 255, 0)'
+    }
+
+    function canvasToImg() {
+        generateImg.src = canvas.toDataURL("image/png")
+    }
+
+    // 点击icon
+    ul.addEventListener('click', function (event) {
+        if (event.target.nodeName.toLowerCase() === 'img') {
+            resetCanvas()
+            upLoadImg && drawImage(upLoadImg)
+            drawImage(event.target)
+            canvasToImg()
+            avatarIcon = event.target
+        }
+    })
+    // 上传图片
+    button.addEventListener('click', function () {
+        fileUpload.click()
+    })
+    // 监听文件变化
+    fileUpload.addEventListener('change', function () {
+        const img = new Image()
+        img.src = URL.createObjectURL(this.files[0])
+        img.onload = function () {
+            drawImage(img)
+            drawImage(avatarIcon)
+            canvasToImg()
+            upLoadImg = img
+        }
+    })
+    // 默认是第一张
+    img[0].onload = function () {
+        drawImage(img[0])
+        avatarIcon = img[0]
+        canvasToImg()
+    }
+</script>
+</body>
+
+</html>
