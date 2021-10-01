@@ -1,6 +1,3 @@
-# GuoqingPicture
-html网页实现微信头像挂红旗，国庆节个性化头像
-
 # 一、 先看效果：
 | ![](https://gitee.com/xinyang666code/blogpictures/raw/master/images/01.png) | ![](https://gitee.com/xinyang666code/blogpictures/raw/master/images/2.png) | ![](https://gitee.com/xinyang666code/blogpictures/raw/master/images/4.png) | ![](https://gitee.com/xinyang666code/blogpictures/raw/master/images/5.png) |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -21,3 +18,4 @@ html网页实现微信头像挂红旗，国庆节个性化头像
 ![image-20211001005259940](https://gitee.com/xinyang666code/blogpictures/raw/master/images/image-20211001005259940.png)
 
 根据html文件名，可知访问的地址为：https://www.xinyang666.xyz/guoqing/1.html
+
